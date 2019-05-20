@@ -45,6 +45,7 @@ namespace testingWebApp
             }
             else
             {
+                app.UsePathBase("/TextShortener");
                 app.UseExceptionHandler("/Error");
             }
 

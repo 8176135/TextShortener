@@ -20,8 +20,20 @@ namespace testingWebApp.Pages
 
         public void OnPostAddNewAsync(string id, string content)
         {
-            _service.Create(new TextStore() {SearchID = id, TextContent = content});
-            ViewData["Success"] = "Successfully added something";
+            if (content == "")
+            {
+                ViewData["Error"] = "Content can't be empty";
+                return;
+            }
+
+            if ( _service.Create(new TextStore() {SearchID = id, TextContent = content}))
+            {
+                ViewData["Success"] = "Successfully added something";
+            }
+            else
+            {
+                ViewData["Error"] = "Key already exists";
+            }
         }
 
         public ActionResult OnPostCheckIdAsync(string id)

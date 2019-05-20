@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
@@ -25,10 +26,22 @@ namespace testingWebApp.Models
             return _textstore.Find<TextStore>(movie => movie.SearchID == id).FirstOrDefault();
         }
 
-        public TextStore Create(TextStore book)
+        public bool Create(TextStore book)
         {
-            _textstore.InsertOne(book);
-            return book;
+            try
+            {
+                _textstore.InsertOne(book);
+            }
+            catch (MongoWriteException e)
+            {
+                if (e.WriteError.Code == 11000)
+                {
+                    return false;
+                }
+                throw;
+            }
+
+            return true;
         }
 
         public void Update(string id, TextStore textStoreIn)

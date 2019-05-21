@@ -38,7 +38,7 @@ function searchWithId(caller) {
     content_box.val("");
     content_box.attr("placeholder", "Loading " + search_val + " ...");
     $.ajax({
-        url: "/?handler=Search",
+        url: "?handler=Search",
         type: "POST",
         headers: {
             RequestVerificationToken:

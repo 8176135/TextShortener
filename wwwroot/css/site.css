@@ -57,5 +57,5 @@ body {
 
 textarea {
   font-size: 9pt !important;
-  font-family: monospace !important;
+  font-family: Consolas, monospace !important;
 }

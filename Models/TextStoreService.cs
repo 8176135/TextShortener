@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace testingWebApp.Models
@@ -21,9 +23,9 @@ namespace testingWebApp.Models
             return _textstore.Find(book => true).ToList();
         }
 
-        public TextStore Get(string id)
+        public TextStore Get(byte[] id)
         {
-            return _textstore.Find<TextStore>(movie => movie.SearchID == id).FirstOrDefault();
+            return _textstore.Find<TextStore>(book => book.SearchID == BsonBinaryData.Create(id)).FirstOrDefault();
         }
 
         public bool Create(TextStore book)
@@ -44,19 +46,19 @@ namespace testingWebApp.Models
             return true;
         }
 
-        public void Update(string id, TextStore textStoreIn)
+        public void Update(byte[] id, TextStore textStoreIn)
         {
-            _textstore.ReplaceOne(movie => movie.SearchID == id, textStoreIn);
+            _textstore.ReplaceOne(book => book.SearchID == BsonBinaryData.Create(id), textStoreIn);
         }
 
         public void Remove(TextStore textStoreIn)
         {
-            _textstore.DeleteOne(movie => movie.SearchID == textStoreIn.SearchID);
+            _textstore.DeleteOne(book => book.SearchID == textStoreIn.SearchID);
         }
 
-        public void Remove(string id)
+        public void Remove(byte[] id)
         {
-            _textstore.DeleteOne(movie => movie.SearchID == id);
+            _textstore.DeleteOne(book => book.SearchID == BsonBinaryData.Create(id));
         }
     }
 }

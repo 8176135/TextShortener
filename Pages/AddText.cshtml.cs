@@ -26,7 +26,7 @@ namespace testingWebApp.Pages
                 return;
             }
 
-            if ( _service.Create(new TextStore() {SearchID = id, TextContent = content}))
+            if ( _service.Create(new TextStore() {SearchID = EncryptionHelper.GenerateHash(id), TextContent = EncryptionHelper.Encrypt(content, id)}))
             {
                 ViewData["Success"] = "Successfully added something";
             }
@@ -38,7 +38,7 @@ namespace testingWebApp.Pages
 
         public ActionResult OnPostCheckIdAsync(string id)
         {
-            return id != "" ? Content(_service.Get(id) == null ? "Free" : "Exists") : Content("Exists");
+            return id != "" ? Content(_service.Get(EncryptionHelper.GenerateHash(id)) == null ? "Free" : "Exists") : Content("Exists");
         }
 
         public void OnGet()

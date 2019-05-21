@@ -54,3 +54,8 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+textarea {
+  font-size: 9pt !important;
+  font-family: monospace !important;
+}

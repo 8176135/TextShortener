@@ -22,7 +22,7 @@
         </div>
     }
     <div class="row justify-content-center">
-        <form asp-page-handler="AddNew" method="post" class="col-md-6">
+        <form asp-page-handler="AddNew" method="post" class="col-md-9">
             <div class="form-group">
                 <label for="search_id_content">Save ID: </label>
                 <input class="form-control" onblur="checkForSearchId(this)" type="text" name="id" id="search_id_content" placeholder="Save ID" value="@RandomStringGen.GenId(7)" required>

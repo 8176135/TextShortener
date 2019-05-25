@@ -83,7 +83,7 @@ namespace testingWebApp
             }
         }
 
-        private static byte[] Generate256BitsOfRandomEntropy()
+        static byte[] Generate256BitsOfRandomEntropy()
         {
             var randomBytes = new byte[32]; // 32 Bytes will give us 256 bits.
             using (var rngCsp = new RNGCryptoServiceProvider())
@@ -94,15 +94,5 @@ namespace testingWebApp
 
             return randomBytes;
         }
-
-
-//        public bool Verify(string password)
-//        {
-//            byte[] test = new Rfc2898DeriveBytes(password, _salt, HashIter).GetBytes(HashSize);
-//            for (int i = 0; i < HashSize; i++)
-//                if (test[i] != _hash[i])
-//                    return false;
-//            return true;
-//        }
     }
 }

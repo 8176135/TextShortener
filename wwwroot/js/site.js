@@ -26,7 +26,7 @@ function checkForSearchId(caller) {
     });
 }
 
-$(".default_txtbox").keyup(function(event) {
+$(".default_txtbox").keyup(function (event) {
     if (event.keyCode === 13) {
         $(".default_btn").click();
     }
@@ -35,6 +35,11 @@ $(".default_txtbox").keyup(function(event) {
 function searchWithId(caller) {
     let search_val = $("#search_id").val();
     let content_box = $("#content_textbox");
+
+    if (search_val === "") {
+        return;
+    }
+
     content_box.val("");
     content_box.attr("placeholder", "Loading " + search_val + " ...");
     $.ajax({
